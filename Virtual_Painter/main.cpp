@@ -12,10 +12,9 @@ vector<vector<int>> newPoints;
 // from hmin,hmax,smin,smax,vmin,vmax
 // to hmin, smin, vmin, hmax, smax, vmax
 vector<vector<int>> myColors {{0,194,44,88,255,197}};
-
 vector<Scalar> myColorsValue{{0,255,0}};
 
-// find object //
+// find object contourns and return one point //
 Point getContourns(Mat imgDilate)
 {
     vector<vector<Point>> contourns;
@@ -49,7 +48,7 @@ Point getContourns(Mat imgDilate)
     return myPoint;
 }
 
-// find object color
+// find object color //
 vector<vector<int>> findColor()
 {
     Mat imgHSV;
@@ -63,7 +62,7 @@ vector<vector<int>> findColor()
         Mat mask;
         inRange(imgHSV, lower, upper, mask);
         
-        //show windows with wich one mask
+        //show windows with each one mask
         //imshow(to_string(i), mask);
 
         Point myPoint = getContourns(mask);
@@ -76,7 +75,7 @@ vector<vector<int>> findColor()
 
 }
 
-// draw in img
+// draw image //
 void drawOnCanvas(vector<vector<int>> myPoints, vector<Scalar> myColorsValue)
 {
     for(int i=0; i<myPoints.size(); i++)
@@ -87,7 +86,8 @@ void drawOnCanvas(vector<vector<int>> myPoints, vector<Scalar> myColorsValue)
 
 int main()
 {
-    VideoCapture cap(0);
+    // in cap(x) you select your webcam, 0 is default cam, 2 is my droidcam
+    VideoCapture cap(2);
     
 
     while(true)
